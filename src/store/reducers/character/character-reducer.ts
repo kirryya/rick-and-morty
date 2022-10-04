@@ -2,14 +2,14 @@ import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
 
 import { requestAPI } from 'api';
 
-const initialState: any = {};
+const initialState: any = '';
 
 const slice = createSlice({
   name: 'character',
   initialState,
   reducers: {
-    setCharacter(state, action: PayloadAction<any>) {
-      return { ...action.payload };
+    setCharacter(state, action: PayloadAction<{ characters: any }>) {
+      return action.payload.characters;
     },
   },
 });
@@ -22,8 +22,7 @@ export const fetchCharacter = () => async (dispatch: Dispatch) => {
   try {
     const res = await requestAPI.getCharacters();
 
-    console.log(res.data);
-    dispatch(setCharacter(res.data));
+    dispatch(setCharacter({ characters: res.data }));
   } catch (error) {
     if (error instanceof Error) {
       console.log(`error${error}`);
