@@ -2,13 +2,29 @@ import React, { FC, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchCharacter } from 'store/reducers/character/character-reducer';
+import { Preloader } from 'components/common/Preloader';
+import { fetchCharacter } from 'store';
+import { RequestStatusType } from 'store/reducers/app/app-reducer';
 import { AppRootStateType, TypedDispatch } from 'store/store';
 import { ReturnComponentType } from 'types';
 
 export const App: FC = (): ReturnComponentType => {
-  const character = useSelector<AppRootStateType, any>(state => state.character);
+  const status = useSelector<AppRootStateType, RequestStatusType>(
+    state => state.app.status,
+  );
 
+  return (
+    <div>
+      {status === 'loading' && <Preloader />}
+      <Characters />
+    </div>
+  );
+};
+
+export const Characters: FC = (): ReturnComponentType => {
+  const characters = useSelector<AppRootStateType, any>(
+    state => state.character.characters,
+  );
   const dispatch = useDispatch<TypedDispatch>();
 
   useEffect(() => {
@@ -17,9 +33,14 @@ export const App: FC = (): ReturnComponentType => {
 
   return (
     <div>
-      <div>Rick and Morty</div>
-      <div>{character && character.results[1].name}</div>
-      <img src={character && character.results[1].image} alt={`Character's ava`} />
+      {characters.results?.map((ch: any) => (
+        <div key={ch.id}>
+          <span>Name: {ch.name}</span>
+          <span>Species: {ch.species}</span>
+          <span>Gender: {ch.gender}</span>
+          <img src={ch.image} alt={`Character's ava`} />
+        </div>
+      ))}
     </div>
   );
 };
