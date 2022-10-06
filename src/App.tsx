@@ -1,11 +1,14 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
 
-import { Preloader } from 'components/common/Preloader';
-import { fetchCharacter } from 'store';
+import { ButtonAppBar } from 'components/AppBar/AppBar';
+import { Preloader } from 'components/common/Preloader/Preloader';
+import { Path } from 'enums';
+import { Characters, Episodes, Home, Locations } from 'pages';
 import { RequestStatusType } from 'store/reducers/app/app-reducer';
-import { AppRootStateType, TypedDispatch } from 'store/store';
+import { AppRootStateType } from 'store/store';
 import { ReturnComponentType } from 'types';
 
 export const App: FC = (): ReturnComponentType => {
@@ -13,34 +16,23 @@ export const App: FC = (): ReturnComponentType => {
     state => state.app.status,
   );
 
+  const ROUTES = [
+    { path: Path.HOME, element: <Home /> },
+    { path: Path.CHARACTERS, element: <Characters /> },
+    { path: Path.LOCATIONS, element: <Locations /> },
+    { path: Path.EPISODES, element: <Episodes /> },
+  ];
+
   return (
     <div>
+      <ButtonAppBar />
+
       {status === 'loading' && <Preloader />}
-      <Characters />
-    </div>
-  );
-};
-
-export const Characters: FC = (): ReturnComponentType => {
-  const characters = useSelector<AppRootStateType, any>(
-    state => state.character.characters,
-  );
-  const dispatch = useDispatch<TypedDispatch>();
-
-  useEffect(() => {
-    dispatch(fetchCharacter());
-  }, [dispatch]);
-
-  return (
-    <div>
-      {characters.results?.map((ch: any) => (
-        <div key={ch.id}>
-          <span>Name: {ch.name}</span>
-          <span>Species: {ch.species}</span>
-          <span>Gender: {ch.gender}</span>
-          <img src={ch.image} alt={`Character's ava`} />
-        </div>
-      ))}
+      <Routes>
+        {ROUTES.map(({ path, element }) => (
+          <Route key={path} path={path} element={element} />
+        ))}
+      </Routes>
     </div>
   );
 };

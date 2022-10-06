@@ -1,9 +1,7 @@
 import React, { FC } from 'react';
 
-import loader from '../../assets/images/loader.gif';
-
-import style from './Preloader.module.css';
-
+import loader from 'assets/images/loader.gif';
+import style from 'components/common/Preloader/Preloader.module.css';
 import { ReturnComponentType } from 'types';
 
 export const Preloader: FC = (): ReturnComponentType => {
