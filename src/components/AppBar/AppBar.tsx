@@ -1,9 +1,6 @@
 import React, { FC } from 'react';
 
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import { AppBar, Box, Toolbar, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import { Path } from 'enums';
@@ -19,18 +16,17 @@ export const ButtonAppBar: FC = (): ReturnComponentType => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
+      <AppBar position="static" color="default">
+        <Toolbar style={{ display: 'flex', justifyContent: 'center' }}>
           {settings.map(({ setting, id, route }) => (
-            <Typography
-              key={id}
-              variant="h6"
-              component="div"
-              style={{ marginLeft: '10px' }}
-            >
+            <Typography key={id} variant="h6" component="div" style={{ margin: '15px' }}>
               <Link
                 to={`${route}`}
-                style={{ textDecoration: 'none', display: 'flex', color: 'inherit' }}
+                style={{
+                  textDecoration: 'none',
+                  display: 'flex',
+                  color: 'inherit',
+                }}
               >
                 {setting}
               </Link>
