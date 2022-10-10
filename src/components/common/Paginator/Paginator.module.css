@@ -1,0 +1,23 @@
+.paginator {
+    margin: 15px;
+    cursor: pointer;
+}
+.next {
+    margin-left: 10px;
+}
+.prev {
+    margin-right: 10px;
+}
+
+.page {
+    border: 1px solid;
+    padding: 3px;
+    margin: 1px;
+    background-color: #f3f5f1;
+}
+.selectedPage {
+    font-weight: bolder;
+    border: 2px solid;
+    padding: 5px;
+    background-color: #cfdbe8;
+}

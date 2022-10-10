@@ -5,6 +5,7 @@ import { setAppStatus } from 'store/reducers/app/app-reducer';
 
 const initialState: InitialStateType = {
   characters: {},
+  currentPage: 1,
 };
 
 const slice = createSlice({
@@ -14,18 +15,21 @@ const slice = createSlice({
     setCharacter(state, action: PayloadAction<{ characters: any }>) {
       state.characters = action.payload.characters;
     },
+    setCurrentPage(state, action: PayloadAction<{ currentPage: number }>) {
+      state.currentPage = action.payload.currentPage;
+    },
   },
 });
 
 export const characterReducer = slice.reducer;
-export const { setCharacter } = slice.actions;
+export const { setCharacter, setCurrentPage } = slice.actions;
 
 // thunks
-export const fetchCharacter = () => async (dispatch: Dispatch) => {
+export const fetchCharacter = (currentPage: number) => async (dispatch: Dispatch) => {
+  dispatch(setAppStatus({ status: 'loading' }));
+  dispatch(setCurrentPage({ currentPage }));
   try {
-    dispatch(setAppStatus({ status: 'loading' }));
-
-    const res = await requestAPI.getCharacters();
+    const res = await requestAPI.getCharacters(currentPage);
 
     dispatch(setCharacter({ characters: res.data }));
     dispatch(setAppStatus({ status: 'succeeded' }));
@@ -39,4 +43,5 @@ export const fetchCharacter = () => async (dispatch: Dispatch) => {
 
 export type InitialStateType = {
   characters: any;
+  currentPage: number;
 };
