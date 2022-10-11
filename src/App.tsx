@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 
-import { ButtonAppBar } from 'components/AppBar/AppBar';
+import { ButtonAppBar } from 'components/appBar/AppBar';
 import { Path } from 'enums';
 import { Characters, Episodes, Home, Locations } from 'pages';
 import { ReturnComponentType } from 'types';

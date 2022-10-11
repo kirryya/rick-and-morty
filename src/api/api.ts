@@ -6,6 +6,9 @@ export const requestAPI = {
   getCharacters(currentPage: number) {
     return config.get<AxiosResponse>(`character/?page=${currentPage}`);
   },
+  getCharacter(id: number) {
+    return config.get<AxiosResponse>(`/character/${id}`);
+  },
   getLocations() {
     return config.get<AxiosResponse>('location');
   },

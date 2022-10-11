@@ -1,10 +1,13 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 import { Box, Grid, Paper } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { CharacterInfo } from 'components/characterInfo/CharacterInfo';
 import { Paginator } from 'components/common/Paginator/Paginator';
-import { fetchCharacter } from 'store';
+import { UniverseModalWindow } from 'components/common/UniverseModal/UniverseModalWindow';
+import { fetchCharacters } from 'store';
+import { fetchCharacter } from 'store/reducers/character/character-reducer';
 import { AppRootStateType, TypedDispatch } from 'store/store';
 import { ReturnComponentType } from 'types';
 
@@ -26,12 +29,18 @@ export const Characters: FC = (): ReturnComponentType => {
   const portionSize = 10;
   const dispatch = useDispatch<TypedDispatch>();
 
+  const [isActive, setIsActive] = useState<boolean>(false);
+
   useEffect(() => {
-    dispatch(fetchCharacter(currentPage));
-  }, [dispatch]);
+    dispatch(fetchCharacters(currentPage));
+  }, [currentPage]);
 
   const onPageChanged = (pageNumber: number): void => {
-    dispatch(fetchCharacter(pageNumber));
+    dispatch(fetchCharacters(pageNumber));
+  };
+  const onNameClickHandle = (id: number): void => {
+    setIsActive(true);
+    dispatch(fetchCharacter(id));
   };
 
   return (
@@ -53,9 +62,18 @@ export const Characters: FC = (): ReturnComponentType => {
                 <Box sx={{ p: 3, width: '100%' }}>
                   <Paper elevation={3}>
                     <div key={ch.id} style={{ display: 'flex', flexDirection: 'column' }}>
-                      <span>Name: {ch.name}</span>
-                      <span>Species: {ch.species}</span>
-                      <span>Gender: {ch.gender}</span>
+                      <span
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                          cursor: 'pointer',
+                        }}
+                        onClick={() => onNameClickHandle(ch.id)}
+                        role="button"
+                        aria-hidden
+                      >
+                        <h2>{ch.name}</h2>
+                      </span>
                       <img src={ch.image} alt={`Character's ava`} />
                     </div>
                   </Paper>
@@ -65,6 +83,9 @@ export const Characters: FC = (): ReturnComponentType => {
           );
         })}
       </Grid>
+      <UniverseModalWindow isActive={isActive} setActive={setIsActive}>
+        <CharacterInfo />
+      </UniverseModalWindow>
     </div>
   );
 };
