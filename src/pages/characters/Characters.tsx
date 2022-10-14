@@ -33,7 +33,7 @@ export const Characters: FC = (): ReturnComponentType => {
 
   useEffect(() => {
     dispatch(fetchCharacters(currentPage));
-  }, [currentPage]);
+  }, []);
 
   const onPageChanged = (pageNumber: number): void => {
     dispatch(fetchCharacters(pageNumber));
