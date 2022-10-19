@@ -21,7 +21,6 @@ export const Locations: FC = (): ReturnComponentType => {
           <span>Name: {ch.name}</span>
           <span>Dimension: {ch.dimension}</span>
           <span>Type: {ch.type}</span>
-          {/* <img src={ch.residents[0]?.image} alt={`Resident's ava`} /> */}
         </div>
       ))}
     </div>

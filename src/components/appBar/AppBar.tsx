@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import { AppBar, Box, Toolbar, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { Path } from 'enums';
 import { ReturnComponentType } from 'types';
@@ -20,16 +20,19 @@ export const ButtonAppBar: FC = (): ReturnComponentType => {
         <Toolbar style={{ display: 'flex', justifyContent: 'center' }}>
           {settings.map(({ setting, id, route }) => (
             <Typography key={id} variant="h6" component="div" style={{ margin: '15px' }}>
-              <Link
+              <NavLink
                 to={`${route}`}
-                style={{
-                  textDecoration: 'none',
-                  display: 'flex',
-                  color: 'inherit',
+                end
+                style={({ isActive }) => {
+                  return {
+                    textDecoration: 'none',
+                    display: 'flex',
+                    color: isActive ? 'inherit' : 'darkgrey',
+                  };
                 }}
               >
                 {setting}
-              </Link>
+              </NavLink>
             </Typography>
           ))}
         </Toolbar>
