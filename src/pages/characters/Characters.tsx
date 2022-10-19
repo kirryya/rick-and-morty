@@ -3,6 +3,8 @@ import React, { FC, useEffect, useState } from 'react';
 import { Box, Grid, Paper } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
+import style from './Characters.module.css';
+
 import { CharacterInfo } from 'components/characterInfo/CharacterInfo';
 import { Paginator } from 'components/common/Paginator/Paginator';
 import { UniverseModalWindow } from 'components/common/UniverseModal/UniverseModalWindow';
@@ -45,7 +47,7 @@ export const Characters: FC = (): ReturnComponentType => {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
+      <div className={style.main}>
         <Paginator
           currentPage={currentPage}
           portionSize={portionSize}
@@ -61,13 +63,9 @@ export const Characters: FC = (): ReturnComponentType => {
               <Box sx={{ display: 'flex', width: '100%' }}>
                 <Box sx={{ p: 3, width: '100%' }}>
                   <Paper elevation={3}>
-                    <div key={ch.id} style={{ display: 'flex', flexDirection: 'column' }}>
+                    <div key={ch.id} className={style.characters}>
                       <span
-                        style={{
-                          display: 'flex',
-                          justifyContent: 'center',
-                          cursor: 'pointer',
-                        }}
+                        className={style.character}
                         onClick={() => onNameClickHandle(ch.id)}
                         role="button"
                         aria-hidden

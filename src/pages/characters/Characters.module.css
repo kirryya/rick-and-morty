@@ -1,0 +1,21 @@
+.main {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.characters {
+    display: flex;
+    flex-direction: column;
+}
+
+.character {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    color: inherit;
+}
+
+.character:hover {
+    color: darkgrey;
+}
