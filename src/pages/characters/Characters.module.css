@@ -1,4 +1,8 @@
 .main {
+    background-color: #D6E4F0;
+}
+
+.paginator {
     display: flex;
     justify-content: center;
     margin-top: 10px;
@@ -19,3 +23,17 @@
 .character:hover {
     color: darkgrey;
 }
+
+.name {
+    max-width: 290px;
+    max-height: 100px;
+    white-space: nowrap; /* Запрещаем перенос строк */
+    overflow: hidden; /* Обрезаем все, что не помещается в область */
+    text-overflow: ellipsis; /* Добавляем многоточие */
+}
+
+.name:hover {
+    overflow: visible;
+    white-space: normal;
+}
+

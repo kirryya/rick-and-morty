@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import { Box, Grid, Paper } from '@mui/material';
+import { Avatar, Box, Grid, Paper } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
 import style from './Characters.module.css';
@@ -46,8 +46,8 @@ export const Characters: FC = (): ReturnComponentType => {
   };
 
   return (
-    <div>
-      <div className={style.main}>
+    <div className={style.main}>
+      <div className={style.paginator}>
         <Paginator
           currentPage={currentPage}
           portionSize={portionSize}
@@ -70,9 +70,14 @@ export const Characters: FC = (): ReturnComponentType => {
                         role="button"
                         aria-hidden
                       >
-                        <h2>{ch.name}</h2>
+                        <h2 className={style.name}>{ch.name}</h2>
                       </span>
-                      <img src={ch.image} alt={`Character's ava`} />
+                      <Avatar
+                        variant="square"
+                        alt={`Character's ava`}
+                        src={ch.image}
+                        sx={{ width: 300, height: 300 }}
+                      />
                     </div>
                   </Paper>
                 </Box>

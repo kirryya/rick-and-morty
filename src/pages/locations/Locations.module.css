@@ -1,0 +1,20 @@
+.main {
+
+}
+
+.location {
+    border: 1px solid #556ee6;
+    background-color: #D6E4F0;
+    border-radius: 10px;
+    margin: 10px;
+    padding-left: 10px;
+    min-height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.location:hover {
+    background-color: white;
+    cursor: pointer;
+}
