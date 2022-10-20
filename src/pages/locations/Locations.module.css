@@ -2,6 +2,14 @@
 
 }
 
+.singleLocation {
+    margin: 10px;
+    border: 1px solid #556ee6;
+    background-color: #D6E4F0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
 .location {
     border: 1px solid #556ee6;
     background-color: #D6E4F0;

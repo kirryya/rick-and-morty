@@ -26,13 +26,13 @@ export const Locations: FC = (): ReturnComponentType => {
     <div className={style.main}>
       {location && (
         <div style={{ display: 'flex', justifyContent: 'center', margin: '10px' }}>
-          <span>
+          <span className={style.singleLocation}>
             Name: <h3>{location.name}</h3>
           </span>
-          <span>
+          <span className={style.singleLocation}>
             Type: <h3>{location.type}</h3>
           </span>
-          <span>
+          <span className={style.singleLocation}>
             Dimension: <h3>{location.dimension}</h3>
           </span>
         </div>
