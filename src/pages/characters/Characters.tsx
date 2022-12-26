@@ -5,11 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import style from './Characters.module.css';
 
-import { CharacterInfo } from 'components/characterInfo/CharacterInfo';
-import { Paginator } from 'components/common/Paginator/Paginator';
-import { UniverseModalWindow } from 'components/common/UniverseModal/UniverseModalWindow';
-import { fetchCharacters } from 'store';
-import { fetchCharacter } from 'store/reducers/character/character-reducer';
+import { CharacterInfo, Paginator, UniverseModalWindow } from 'components';
+import { fetchCharacter, fetchCharacters } from 'store';
 import { AppRootStateType, TypedDispatch } from 'store/store';
 import { ReturnComponentType } from 'types';
 

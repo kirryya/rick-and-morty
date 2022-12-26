@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import style from './Locations.module.css';
 
-import { fetchLocations } from 'store';
-import { fetchLocation } from 'store/reducers/locations/locations-reducer';
+import { fetchLocation, fetchLocations } from 'store';
 import { AppRootStateType, TypedDispatch } from 'store/store';
 import { ReturnComponentType } from 'types';
 
