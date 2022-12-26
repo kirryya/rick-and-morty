@@ -25,9 +25,9 @@ export const fetchEpisode = () => async (dispatch: Dispatch) => {
   try {
     dispatch(setAppStatus({ status: 'loading' }));
 
-    const res = await requestAPI.getEpisodes();
+    const { data } = await requestAPI.getEpisodes();
 
-    dispatch(setEpisode({ episodes: res.data }));
+    dispatch(setEpisode({ episodes: data }));
     dispatch(setAppStatus({ status: 'succeeded' }));
   } catch (error) {
     if (error instanceof Error) {

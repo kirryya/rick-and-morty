@@ -33,9 +33,9 @@ export const fetchCharacters = (currentPage: number) => async (dispatch: Dispatc
   dispatch(setAppStatus({ status: 'loading' }));
   dispatch(setCurrentPage({ currentPage }));
   try {
-    const res = await requestAPI.getCharacters(currentPage);
+    const { data } = await requestAPI.getCharacters(currentPage);
 
-    dispatch(setCharacters({ characters: res.data }));
+    dispatch(setCharacters({ characters: data }));
     dispatch(setAppStatus({ status: 'succeeded' }));
   } catch (error) {
     if (error instanceof Error) {
@@ -48,9 +48,9 @@ export const fetchCharacters = (currentPage: number) => async (dispatch: Dispatc
 export const fetchCharacter = (id: number) => async (dispatch: Dispatch) => {
   dispatch(setAppStatus({ status: 'loading' }));
   try {
-    const res = await requestAPI.getCharacter(id);
+    const { data } = await requestAPI.getCharacter(id);
 
-    dispatch(setCharacter({ character: res.data }));
+    dispatch(setCharacter({ character: data }));
     dispatch(setAppStatus({ status: 'succeeded' }));
   } catch (error) {
     if (error instanceof Error) {

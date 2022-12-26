@@ -10,8 +10,12 @@ import { AppRootStateType, TypedDispatch } from 'store/store';
 import { ReturnComponentType } from 'types';
 
 export const Locations: FC = (): ReturnComponentType => {
-  const locations = useSelector<AppRootStateType, any>(state => state.location.locations);
-  const location = useSelector<AppRootStateType, any>(state => state.location.location);
+  const { results } = useSelector<AppRootStateType, any>(
+    state => state.location.locations,
+  );
+  const { name, type, dimension } = useSelector<AppRootStateType, any>(
+    state => state.location.location,
+  );
   const dispatch = useDispatch<TypedDispatch>();
 
   useEffect(() => {
@@ -24,29 +28,30 @@ export const Locations: FC = (): ReturnComponentType => {
 
   return (
     <div className={style.main}>
-      {location && (
+      {name && (
         <div style={{ display: 'flex', justifyContent: 'center', margin: '10px' }}>
           <span className={style.singleLocation}>
-            Name: <h3>{location.name}</h3>
+            Name: <h3>{name}</h3>
           </span>
           <span className={style.singleLocation}>
-            Type: <h3>{location.type}</h3>
+            Type: <h3>{type}</h3>
           </span>
           <span className={style.singleLocation}>
-            Dimension: <h3>{location.dimension}</h3>
+            Dimension: <h3>{dimension}</h3>
           </span>
         </div>
       )}
-      {locations.results?.map((ch: any) => (
+
+      {results?.map(({ id, name }: any) => (
         <div
-          key={ch.id}
+          key={id}
           role="button"
           aria-hidden
           className={style.location}
-          onClick={() => onLocationClickHandle(ch.id)}
+          onClick={() => onLocationClickHandle(id)}
         >
           <span>
-            <h3>{ch.name}</h3>
+            <h3>{name}</h3>
           </span>
         </div>
       ))}

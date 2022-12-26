@@ -14,7 +14,7 @@ import { AppRootStateType, TypedDispatch } from 'store/store';
 import { ReturnComponentType } from 'types';
 
 export const Characters: FC = (): ReturnComponentType => {
-  const characters = useSelector<AppRootStateType, any>(
+  const { results } = useSelector<AppRootStateType, any>(
     state => state.character.characters,
   );
 
@@ -57,25 +57,25 @@ export const Characters: FC = (): ReturnComponentType => {
         />
       </div>
       <Grid container spacing={2} justifyContent="center" alignItems="center">
-        {characters.results?.map((ch: any) => {
+        {results?.map(({ id, name, image }: any) => {
           return (
-            <Grid item key={ch.id}>
+            <Grid item key={id}>
               <Box sx={{ display: 'flex', width: '100%' }}>
                 <Box sx={{ p: 3, width: '100%' }}>
                   <Paper elevation={3}>
-                    <div key={ch.id} className={style.characters}>
+                    <div key={id} className={style.characters}>
                       <span
                         className={style.character}
-                        onClick={() => onNameClickHandle(ch.id)}
+                        onClick={() => onNameClickHandle(id)}
                         role="button"
                         aria-hidden
                       >
-                        <h2 className={style.name}>{ch.name}</h2>
+                        <h2 className={style.name}>{name}</h2>
                       </span>
                       <Avatar
                         variant="square"
                         alt={`Character's ava`}
-                        src={ch.image}
+                        src={image}
                         sx={{ width: 300, height: 300 }}
                       />
                     </div>
