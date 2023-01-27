@@ -1,4 +1,4 @@
-export { Characters } from 'pages/characters/Characters';
-export { Locations } from 'pages/locations/Locations';
-export { Episodes } from 'pages/episodes/Episodes';
-export { Home } from 'pages/home/Home';
+export { Characters } from './characters/Characters';
+export { Locations } from './locations/Locations';
+export { Episodes } from './episodes/Episodes';
+export { Home } from './home/Home';

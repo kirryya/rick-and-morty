@@ -1,18 +1,18 @@
 .modal-closebtn {
-    position: absolute;
-    width: 32px;
-    height: 32px;
-    top: -15px;
-    right: -15px;
-    background: #ffffff;
-    border-radius: 50%;
-    border: 2px solid #d4daf8;
-    box-sizing: border-box;
-    font-size: 16px;
-    color: #556ee6;
-    cursor: pointer;
-    user-select: none;
-    z-index: 999;
-    display: grid;
-    place-items: center;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  top: -15px;
+  right: -15px;
+  background: #ffffff;
+  border-radius: 50%;
+  border: 2px solid #d4daf8;
+  box-sizing: border-box;
+  font-size: 16px;
+  color: #556ee6;
+  cursor: pointer;
+  user-select: none;
+  z-index: 999;
+  display: grid;
+  place-items: center;
 }

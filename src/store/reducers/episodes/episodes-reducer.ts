@@ -1,9 +1,8 @@
-import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { requestAPI } from 'api';
-import { setAppStatus } from 'store/reducers/app/app-reducer';
+import { InitialEpisodeStateType } from 'types';
 
-const initialState: InitialStateType = {
+const initialState: InitialEpisodeStateType = {
   episodes: {},
 };
 
@@ -19,24 +18,3 @@ const slice = createSlice({
 
 export const episodeReducer = slice.reducer;
 export const { setEpisode } = slice.actions;
-
-// thunks
-export const fetchEpisode = () => async (dispatch: Dispatch) => {
-  try {
-    dispatch(setAppStatus({ status: 'loading' }));
-
-    const { data } = await requestAPI.getEpisodes();
-
-    dispatch(setEpisode({ episodes: data }));
-    dispatch(setAppStatus({ status: 'succeeded' }));
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(`error${error}`);
-      dispatch(setAppStatus({ status: 'failed' }));
-    }
-  }
-};
-
-export type InitialStateType = {
-  episodes: any;
-};

@@ -1,9 +1,8 @@
-import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { requestAPI } from 'api';
-import { setAppStatus } from 'store/reducers/app/app-reducer';
+import { InitialCharacterStateType } from 'types';
 
-const initialState: InitialStateType = {
+const initialState: InitialCharacterStateType = {
   characters: {},
   character: {},
   currentPage: 1,
@@ -27,41 +26,3 @@ const slice = createSlice({
 
 export const characterReducer = slice.reducer;
 export const { setCharacters, setCurrentPage, setCharacter } = slice.actions;
-
-// thunks
-export const fetchCharacters = (currentPage: number) => async (dispatch: Dispatch) => {
-  dispatch(setAppStatus({ status: 'loading' }));
-  dispatch(setCurrentPage({ currentPage }));
-  try {
-    const { data } = await requestAPI.getCharacters(currentPage);
-
-    dispatch(setCharacters({ characters: data }));
-    dispatch(setAppStatus({ status: 'succeeded' }));
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(`error${error}`);
-      dispatch(setAppStatus({ status: 'failed' }));
-    }
-  }
-};
-
-export const fetchCharacter = (id: number) => async (dispatch: Dispatch) => {
-  dispatch(setAppStatus({ status: 'loading' }));
-  try {
-    const { data } = await requestAPI.getCharacter(id);
-
-    dispatch(setCharacter({ character: data }));
-    dispatch(setAppStatus({ status: 'succeeded' }));
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(`error${error}`);
-      dispatch(setAppStatus({ status: 'failed' }));
-    }
-  }
-};
-
-export type InitialStateType = {
-  characters: any;
-  character: any;
-  currentPage: number;
-};

@@ -1,13 +1,11 @@
 .mainBlock {
-    min-height: 89vh;
-    background-color: #abb8c3;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
+  min-height: 89vh;
+  background-color: #abb8c3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
 }
-
-

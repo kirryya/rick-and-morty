@@ -1,5 +1,16 @@
-export { fetchCharacters } from './reducers/character/character-reducer';
-export { fetchCharacter } from './reducers/character/character-reducer';
-export { fetchLocations } from './reducers/locations/locations-reducer';
-export { fetchLocation } from './reducers/locations/locations-reducer';
+export { fetchCharacters, fetchCharacter } from './thunks/character';
+export { fetchEpisode } from './thunks/episode';
+export { fetchLocations, fetchLocation } from './thunks/location';
 export { setAppStatus } from './reducers/app/app-reducer';
+export {
+  appReducer,
+  characterReducer,
+  episodeReducer,
+  locationReducer,
+  setLocation,
+  setLocations,
+  setEpisode,
+  setCharacter,
+  setCharacters,
+  setCurrentPage,
+} from './reducers';

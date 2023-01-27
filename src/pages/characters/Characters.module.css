@@ -1,39 +1,38 @@
 .main {
-    background-color: #D6E4F0;
+  background-color: #d6e4f0;
 }
 
 .paginator {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .characters {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .character {
-    display: flex;
-    justify-content: center;
-    cursor: pointer;
-    color: inherit;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  color: inherit;
 }
 
 .character:hover {
-    color: darkgrey;
+  color: darkgrey;
 }
 
 .name {
-    max-width: 290px;
-    max-height: 100px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  max-width: 290px;
+  max-height: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .name:hover {
-    overflow: visible;
-    white-space: normal;
+  overflow: visible;
+  white-space: normal;
 }
-

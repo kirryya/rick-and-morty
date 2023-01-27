@@ -1,9 +1,8 @@
-import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { requestAPI } from 'api';
-import { setAppStatus } from 'store/reducers/app/app-reducer';
+import { InitialLocationStateType } from 'types';
 
-const initialState: InitialStateType = {
+const initialState: InitialLocationStateType = {
   locations: {},
   location: {},
 };
@@ -23,40 +22,3 @@ const slice = createSlice({
 
 export const locationReducer = slice.reducer;
 export const { setLocations, setLocation } = slice.actions;
-
-// thunks
-export const fetchLocations = () => async (dispatch: Dispatch) => {
-  try {
-    dispatch(setAppStatus({ status: 'loading' }));
-
-    const { data } = await requestAPI.getLocations();
-
-    dispatch(setLocations({ locations: data }));
-    dispatch(setAppStatus({ status: 'succeeded' }));
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(`error${error}`);
-      dispatch(setAppStatus({ status: 'failed' }));
-    }
-  }
-};
-
-export const fetchLocation = (id: number) => async (dispatch: Dispatch) => {
-  dispatch(setAppStatus({ status: 'loading' }));
-  try {
-    const { data } = await requestAPI.getLocation(id);
-
-    dispatch(setLocation({ location: data }));
-    dispatch(setAppStatus({ status: 'succeeded' }));
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(`error${error}`);
-      dispatch(setAppStatus({ status: 'failed' }));
-    }
-  }
-};
-
-export type InitialStateType = {
-  locations: any;
-  location: any;
-};
