@@ -3,8 +3,7 @@ import React, { FC, useEffect } from 'react';
 import { Box, Grid, Paper } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchEpisode } from 'store/reducers/episodes/episodes-reducer';
-import { AppRootStateType, TypedDispatch } from 'store/store';
+import { fetchEpisode, AppRootStateType, TypedDispatch } from 'store';
 import { ReturnComponentType } from 'types';
 
 export const Episodes: FC = (): ReturnComponentType => {

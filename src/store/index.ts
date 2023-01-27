@@ -14,3 +14,5 @@ export {
   setCharacters,
   setCurrentPage,
 } from './reducers';
+
+export type { AppRootStateType, TypedDispatch } from './store';
