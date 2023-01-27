@@ -1,12 +1,11 @@
 import { Dispatch } from '@reduxjs/toolkit';
 
 import { requestAPI } from 'api';
-import { setAppStatus, setCharacter, setCharacters, setCurrentPage } from 'store';
+import { setAppStatus, setCharacter, setCharacters } from 'store';
 
 export const fetchCharacters = (currentPage: number) => async (dispatch: Dispatch) => {
   try {
     dispatch(setAppStatus({ status: 'loading' }));
-    dispatch(setCurrentPage({ currentPage }));
 
     const { data } = await requestAPI.getCharacters(currentPage);
 

@@ -1,42 +1,34 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import { Avatar, Box, Grid, Paper } from '@mui/material';
+import { Avatar, Box, Grid, Paper, Pagination } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
 import style from './Characters.module.css';
 
-import { CharacterInfo, Paginator, UniverseModalWindow } from 'components';
-import { fetchCharacter, fetchCharacters } from 'store';
-import { AppRootStateType, TypedDispatch } from 'store/store';
+import { CharacterInfo, UniverseModalWindow } from 'components';
+import { fetchCharacter, fetchCharacters, StateType, TypedDispatch } from 'store';
 import { ReturnComponentType } from 'types';
 
 export const Characters: FC = (): ReturnComponentType => {
-  const { results } = useSelector<AppRootStateType, any>(
-    state => state.character.characters,
-  );
+  const { results } = useSelector<StateType, any>(state => state.character.characters);
+  const { pages } = useSelector<StateType, any>(state => state.character.characters.info);
 
-  const currentPage = useSelector<AppRootStateType, number>(
-    state => state.character.currentPage,
-  );
-
-  // const totalUsersCount = useSelector<AppRootStateType, number>(
-  //   state => state.character.characters?.info.count,
-  // );
-
-  const totalUsersCount = 826;
-  const pageSize = 20;
-  const portionSize = 10;
   const dispatch = useDispatch<TypedDispatch>();
 
   const [isActive, setIsActive] = useState<boolean>(false);
+  const [pageNumber, setPageNumber] = React.useState<number>(1);
 
   useEffect(() => {
-    dispatch(fetchCharacters(currentPage));
-  }, []);
-
-  const onPageChanged = (pageNumber: number): void => {
     dispatch(fetchCharacters(pageNumber));
+  }, [dispatch, pageNumber]);
+
+  const onPagePaginationChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number,
+  ): void => {
+    setPageNumber(value);
   };
+
   const onNameClickHandle = (id: number): void => {
     setIsActive(true);
     dispatch(fetchCharacter(id));
@@ -45,14 +37,16 @@ export const Characters: FC = (): ReturnComponentType => {
   return (
     <div className={style.main}>
       <div className={style.paginator}>
-        <Paginator
-          currentPage={currentPage}
-          portionSize={portionSize}
-          onPageChanged={onPageChanged}
-          pageSize={pageSize}
-          totalUsersCount={totalUsersCount}
+        <Pagination
+          count={pages}
+          page={pageNumber}
+          color="primary"
+          showFirstButton
+          showLastButton
+          onChange={onPagePaginationChange}
         />
       </div>
+
       <Grid container spacing={2} justifyContent="center" alignItems="center">
         {results?.map(({ id, name, image }: any) => {
           return (

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { InitialEpisodeStateType } from 'types';
+import { EpisodesType, InitialEpisodeStateType } from 'types';
 
 const initialState: InitialEpisodeStateType = {
   episodes: {},
@@ -10,7 +10,7 @@ const slice = createSlice({
   name: 'episode',
   initialState,
   reducers: {
-    setEpisode(state, action: PayloadAction<{ episodes: any }>) {
+    setEpisode(state, action: PayloadAction<{ episodes: EpisodesType }>) {
       state.episodes = action.payload.episodes;
     },
   },

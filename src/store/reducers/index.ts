@@ -8,6 +8,5 @@ export {
   characterReducer,
   setCharacter,
   setCharacters,
-  setCurrentPage,
 } from './character/character-reducer';
 export { appReducer } from './app/app-reducer';

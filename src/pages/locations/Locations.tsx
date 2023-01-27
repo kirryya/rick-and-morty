@@ -1,25 +1,34 @@
 import React, { FC, useEffect } from 'react';
 
+import { Pagination } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
 import style from './Locations.module.css';
 
 import { fetchLocation, fetchLocations } from 'store';
-import { AppRootStateType, TypedDispatch } from 'store/store';
+import { StateType, TypedDispatch } from 'store/store';
 import { ReturnComponentType } from 'types';
 
 export const Locations: FC = (): ReturnComponentType => {
-  const { results } = useSelector<AppRootStateType, any>(
-    state => state.location.locations,
-  );
-  const { name, type, dimension } = useSelector<AppRootStateType, any>(
+  const { results } = useSelector<StateType, any>(state => state.location.locations);
+  const { pages } = useSelector<StateType, any>(state => state.location.locations.info);
+  const { name, type, dimension } = useSelector<StateType, any>(
     state => state.location.location,
   );
   const dispatch = useDispatch<TypedDispatch>();
 
+  const [pageNumber, setPageNumber] = React.useState<number>(1);
+
   useEffect(() => {
-    dispatch(fetchLocations());
-  }, [dispatch]);
+    dispatch(fetchLocations(pageNumber));
+  }, [dispatch, pageNumber]);
+
+  const onPagePaginationChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number,
+  ): void => {
+    setPageNumber(value);
+  };
 
   const onLocationClickHandle = (id: number): void => {
     dispatch(fetchLocation(id));
@@ -27,6 +36,16 @@ export const Locations: FC = (): ReturnComponentType => {
 
   return (
     <div className={style.main}>
+      <Pagination
+        count={pages}
+        page={pageNumber}
+        color="primary"
+        showFirstButton
+        showLastButton
+        onChange={onPagePaginationChange}
+        style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}
+      />
+
       {name && (
         <div style={{ display: 'flex', justifyContent: 'center', margin: '10px' }}>
           <span className={style.singleLocation}>
@@ -41,7 +60,7 @@ export const Locations: FC = (): ReturnComponentType => {
         </div>
       )}
 
-      {results?.map(({ id, name }: any) => (
+      {results.map(({ id, name }: any) => (
         <div
           key={id}
           role="button"

@@ -12,7 +12,6 @@ export {
   setEpisode,
   setCharacter,
   setCharacters,
-  setCurrentPage,
 } from './reducers';
 
-export type { AppRootStateType, TypedDispatch } from './store';
+export type { StateType, TypedDispatch } from './store';

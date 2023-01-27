@@ -9,8 +9,8 @@ export const requestAPI = {
   getCharacter(id: number) {
     return config.get<AxiosResponse>(`character/${id}`);
   },
-  getLocations() {
-    return config.get<AxiosResponse>('location');
+  getLocations(currentPage: number) {
+    return config.get<AxiosResponse>(`location/?page=${currentPage}`);
   },
   getLocation(id: number) {
     return config.get<AxiosResponse>(`location/${id}`);

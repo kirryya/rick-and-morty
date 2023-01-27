@@ -3,11 +3,11 @@ import { Dispatch } from '@reduxjs/toolkit';
 import { requestAPI } from 'api';
 import { setAppStatus, setLocation, setLocations } from 'store';
 
-export const fetchLocations = () => async (dispatch: Dispatch) => {
+export const fetchLocations = (currentPage: number) => async (dispatch: Dispatch) => {
   try {
     dispatch(setAppStatus({ status: 'loading' }));
 
-    const { data } = await requestAPI.getLocations();
+    const { data } = await requestAPI.getLocations(currentPage);
 
     dispatch(setLocations({ locations: data }));
     dispatch(setAppStatus({ status: 'succeeded' }));

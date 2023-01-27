@@ -3,11 +3,14 @@ import React, { FC, useEffect } from 'react';
 import { Box, Grid, Paper } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchEpisode, AppRootStateType, TypedDispatch } from 'store';
+import { fetchEpisode, StateType, TypedDispatch } from 'store';
 import { ReturnComponentType } from 'types';
+import { EpisodesType } from 'types/EpisodeType';
 
 export const Episodes: FC = (): ReturnComponentType => {
-  const { results } = useSelector<AppRootStateType, any>(state => state.episode.episodes);
+  const { results } = useSelector<StateType, EpisodesType>(
+    state => state.episode.episodes,
+  );
   const dispatch = useDispatch<TypedDispatch>();
 
   useEffect(() => {

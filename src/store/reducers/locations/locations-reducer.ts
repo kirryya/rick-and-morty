@@ -3,8 +3,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { InitialLocationStateType } from 'types';
 
 const initialState: InitialLocationStateType = {
-  locations: {},
-  location: {},
+  locations: {
+    info: {},
+    results: [],
+  },
+  location: {
+    name: null,
+  },
 };
 
 const slice = createSlice({
