@@ -22,7 +22,6 @@ export const App: FC = (): ReturnComponentType => {
   return (
     <div>
       <ButtonAppBar />
-      {/* {status === 'loading' && <Preloader />} */}
       <Routes>
         {ROUTES.map(({ path, element }) => (
           <Route key={path} path={path} element={element} />
